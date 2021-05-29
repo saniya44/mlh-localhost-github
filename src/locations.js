@@ -5,29 +5,30 @@ const options = {
   provider: "google",
   httpAdapter: "https",
   apiKey: process.env.GOOGLE_API_KEY,
-  sensor: true
+  sensor: true,
 };
 
 const geocoder = NodeGeocoder(options);
 
-const getCoordinates = function(locations) {
-    return geocoder
-      .batchGeocode(locations)
-      .then(coordinates => 
-        coordinates
+const getCoordinates = function (locations) {
+  return geocoder
+    .batchGeocode(locations)
+    .then((coordinates) =>
+      coordinates
         .filter(({ error }) => !error)
         .map(({ error, value: [result, ...results] }) => {
-          if(!result) {
-            return {lat: null, lng: null};
+          if (!result) {
+            return { lat: null, lng: null };
           }
           return {
             lat: result.latitude,
-            lng: result.longitude
+            lng: result.longitude,
           };
         })
-      ).error(console.log);
+    )
+    .error(console.log);
 };
 
 module.exports = {
-  getCoordinates
+  getCoordinates,
 };

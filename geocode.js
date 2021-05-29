@@ -6,8 +6,7 @@ const Locations = require("./src/locations");
 
 const googleMapsApiKey = process.env.GOOGLE_API_KEY;
 
-
-const geocode = function() {
+const geocode = function () {
   return Storage.getNewLocations()
     .then(Locations.getCoordinates)
     .then(Storage.saveNewCoordinates);
