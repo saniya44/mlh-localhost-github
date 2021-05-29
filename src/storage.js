@@ -30,9 +30,13 @@ const getCoordinates = () => {
 const saveNewCoordinates = (newCoordinates) => {
   return getCoordinates().then((currentCoordinates) => {
     console.log({newCoordinates});
-    const coordinates = currentCoordinates.concat(newCoordinates);
-    coordinatesContent = JSON.stringify(coordinates).replace(/\}/g, "}\n");
-    return fs.promises.writeFile(COORDINATES_PATH, coordinatesContent);
+    if(newCoordinates[0].lat != null) { // Covers 'undefined' as well
+      const coordinates = currentCoordinates.concat(newCoordinates);
+      coordinatesContent = JSON.stringify(coordinates).replace(/\}/g, "}\n");
+      return fs.promises.writeFile(COORDINATES_PATH, coordinatesContent);
+    } else {
+      console.log('Do you live on planet earth? Because Google Maps API can only lookup locations on Earth.')
+    }
   })
 };
 
