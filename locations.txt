@@ -1,3 +1,4 @@
 mlh-location-list
 kerala, India
 USA
+seoul,south korea
